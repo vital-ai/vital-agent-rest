@@ -1,0 +1,12 @@
+[Unit]
+Description=HaleyGenericWebapp
+After=network.target
+
+[Service]
+User=centos
+Group=centos
+ExecStart=/home/centos/haley-generic-webapp.sh
+Restart=always
+
+[Install]
+WantedBy=default.target

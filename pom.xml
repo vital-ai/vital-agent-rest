@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+	<groupId>vital-ai</groupId>
+	<artifactId>vital-agent-rest</artifactId>
+	<version>0.1.0</version>
+	
+  <repositories>
+
+	<repository>
+		<id>repo1.maven.org.maven2</id>
+		<name>repo1.maven.org.maven2</name>
+		<url>https://repo1.maven.org/maven2/</url>
+	</repository>
+	
+	<repository>
+    	<id>vital-mvn-repo-releases</id>
+    	<name>Vital AI Private Maven Repo Releases</name>
+    	<url>https://raw.githubusercontent.com/vital-ai/vital-mvn-repo/releases/</url>
+    </repository>
+
+	<!--
+	
+    <repository>
+      <id>vital-public-mvn-repo-releases</id>
+      <name>Vital AI Public Maven Repo Releases</name>
+      <url>https://github.com/vital-ai/vital-public-mvn-repo/raw/releases/</url>
+    </repository>
+
+    <repository>
+      <id>vital-public-mvn-repo-snapshots</id>
+      <name>Vital AI Public Maven Repo Snapshots</name>
+      <url>https://github.com/vital-ai/vital-public-mvn-repo/raw/snapshots/</url>
+    </repository>
+
+	-->
+
+  </repositories>
+
+  <properties>
+    <!-- the main class -->
+    <exec.mainClass>ai.vital.vertx3.VitalVertx3Main</exec.mainClass>
+    <vital.version>0.2.304</vital.version>
+    <vertx.version>3.6.3</vertx.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+
+<!-- there is a conflict with another version, so this needs to come first -->
+<dependency>
+	<groupId>org.apache.httpcomponents</groupId>
+	<artifactId>httpclient</artifactId>
+	<version>4.5.3</version>
+</dependency>
+
+
+
+<!-- this is here to get the sesame rdf libs -->
+<dependency>
+<groupId>vital-ai</groupId>
+  <artifactId>vital-sparql</artifactId>
+  <version>0.2.304</version>
+</dependency>
+
+
+<dependency>
+<groupId>vital-ai</groupId>
+<artifactId>vital-virtuoso</artifactId>
+<version>0.1.0</version>
+
+
+<exclusions>
+    	<exclusion>
+    		<groupId>vital-ai</groupId>
+    		<artifactId>vitalsigns</artifactId>
+    	</exclusion>
+    </exclusions>
+
+
+</dependency>
+
+<dependency>
+<groupId>vital-ai</groupId>
+<artifactId>weaviate-java-client</artifactId>
+<version>0.1.0</version>
+
+<exclusions>
+    <exclusion>
+    	<groupId>vital-ai</groupId>
+    	<artifactId>vitalsigns</artifactId>
+    </exclusion>
+</exclusions>
+
+</dependency>
+
+
+
+<dependency>
+<groupId>vital-ai</groupId>
+<artifactId>virt-jena2</artifactId>
+<version>0.1.0</version>
+</dependency> 
+
+<dependency> 
+      <groupId>vital-ai</groupId>
+      <artifactId>virt-jdbc4</artifactId>
+      <version>0.1.0</version>
+ </dependency> 
+
+
+
+<dependency>
+
+<groupId>org.codehaus.groovy</groupId>
+<artifactId>groovy-all</artifactId>
+<version>2.5.0-SNAPSHOT</version> 
+   
+</dependency>
+
+
+<dependency>
+
+<groupId>vital-ai</groupId>
+<artifactId>vitalsigns</artifactId>
+<version>0.2.304</version>
+		
+	<exclusions>
+		<exclusion>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+		</exclusion>
+		
+		<exclusion>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-json</artifactId>
+		</exclusion>
+							
+		<exclusion>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+		</exclusion>
+	
+		<exclusion>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-xml</artifactId>
+		</exclusion>
+						
+		<exclusion>
+			<groupId>com.ibm.icu</groupId>
+    		<artifactId>icu4j</artifactId>
+		</exclusion>
+							
+	</exclusions>
+	
+</dependency>
+
+<dependency>
+    <groupId>vital-ai</groupId>
+    <artifactId>vital-sql</artifactId>
+    <version>${vital.version}</version>
+    <exclusions>
+    	<exclusion>
+    		<groupId>vital-ai</groupId>
+    		<artifactId>vitalsigns</artifactId>
+    	</exclusion>
+    </exclusions>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
+<dependency>
+    <groupId>com.ibm.icu</groupId>
+    <artifactId>icu4j</artifactId>
+    <version>68.2</version>
+</dependency>
+
+
+<dependency>
+	<groupId>com.google.guava</groupId>
+	<artifactId>guava</artifactId>
+	<version>18.0</version>
+</dependency>
+
+<dependency>
+	<groupId>vital-ai</groupId>
+	<artifactId>vitalsigns-ast</artifactId>
+	<version>0.0.1</version>
+</dependency>
+
+<dependency>
+	<groupId>com.thoughtworks.xstream</groupId>
+	<artifactId>xstream</artifactId>
+	<version>1.4.8</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.8.5</version>
+</dependency>
+
+<dependency>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-web</artifactId>
+    <version>${vertx.version}</version>
+</dependency>
+        
+<!-- simplify verticles management, no custom main required -->
+<dependency>
+	<groupId>vital-ai</groupId>
+    <artifactId>vital-vertx35</artifactId>
+    <version>${vital.version}</version>
+    
+    <exclusions>
+    
+      	<exclusion>
+      		<groupId>org.codehaus.groovy</groupId>
+      		<artifactId>groovy</artifactId>
+      	</exclusion>
+      	
+      </exclusions>
+      
+</dependency>
+
+<dependency>
+	<groupId>ai.haley</groupId>
+  	<artifactId>haley-client-groovy35</artifactId>
+  	<version>0.0.1</version>
+  			
+  	<!-- avoid pulling in dependent groovy that conflicts with local one -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.codehaus.groovy</groupId>
+					<artifactId>groovy</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.codehaus.groovy</groupId>
+					<artifactId>groovy-json</artifactId>
+				</exclusion>
+				
+				
+				<exclusion>
+
+				<groupId>org.codehaus.groovy</groupId>
+				<artifactId>groovy-all</artifactId>
+	
+				</exclusion>
+	
+				<exclusion>
+
+				<groupId>org.codehaus.groovy</groupId>
+				<artifactId>groovy-xml</artifactId>
+	
+				</exclusion>
+				
+			</exclusions>
+  		
+    </dependency>
+
+
+	<!-- DOMAINS START -->
+    
+    <dependency>
+      <groupId>haley-ai</groupId>
+      <artifactId>haley-kg</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+    
+	<dependency>
+      <groupId>vitalai-com</groupId>
+      <artifactId>haley</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+
+	<dependency>
+      <groupId>vitalai-com</groupId>
+      <artifactId>vital-aimp</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+
+    <!-- DOMAINS END -->
+    
+    <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+      <version>1.6</version>
+    </dependency>
+    
+	<dependency>
+    	<groupId>junit</groupId>
+    	<artifactId>junit</artifactId>
+    	<version>4.12</version>
+    	<scope>test</scope>
+	</dependency>
+    
+  </dependencies>
+
+  <build>
+
+    <pluginManagement>
+      <plugins>
+        <!-- We specify the Maven compiler plugin as we need to set it to Java 1.8 -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <!--
+    You only need the part below if you want to build your application into a fat executable jar.
+    This is a jar that contains all the dependencies required to run it, so you can just run it with
+    java -jar
+    -->
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Main-Class>${exec.mainClass}</Main-Class>
+                  </manifestEntries>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                  <resource>META-INF/services/io.vertx.core.spi.VerticleFactory</resource>
+                </transformer>
+				<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+              </transformers>
+              
+                	<filters>
+        	    		<filter>
+            	 			 <artifact>*:*</artifact>
+            	 			 <excludes>
+                  			  	<exclude>META-INF/*.SF</exclude>
+                   			 	<exclude>META-INF/*.DSA</exclude>
+                  			  	<exclude>META-INF/*.RSA</exclude>
+            	 			 </excludes>
+        	    		</filter>
+    		  		</filters>
+							
+              <artifactSet>
+              </artifactSet>
+              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <executions>
+          <execution>
+            <!-- run the application using the fat jar -->
+            <id>run-app</id>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>java</executable>
+              <arguments>
+                <argument>-jar</argument>
+                <argument>target/${project.artifactId}-${project.version}-fat.jar</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>build-helper-maven-plugin</artifactId>
+    <version>1.5</version>
+    <executions>
+      <execution>
+        <id>add-source</id>
+        <phase>generate-sources</phase>
+        <goals>
+          <goal>add-source</goal>
+        </goals>
+        <configuration>
+          <sources>
+            <source>src/main/groovy</source>
+          </sources>
+        </configuration>
+      </execution>
+      <execution>
+        <id>add-test-source</id>
+        <phase>generate-test-sources</phase>
+        <goals>
+          <goal>add-test-source</goal>
+        </goals>
+        <configuration>
+          <sources>
+            <source>src/test/groovy</source>
+          </sources>
+        </configuration>
+      </execution>
+    </executions>
+  </plugin>
+
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <!-- 2.8.0-01 and later require maven-compiler-plugin 3.1 or higher -->
+        <version>3.1</version>
+        <configuration>
+          <compilerId>groovy-eclipse-compiler</compilerId>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-eclipse-compiler</artifactId>
+            <version>2.9.1-01</version>
+          </dependency>
+          <!-- for 2.8.0-01 and later you must have an explicit dependency on groovy-eclipse-batch -->
+          <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-eclipse-batch</artifactId>
+            <version>2.3.7-01</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,138 @@
+#config for static app setup
+name: "agentshop-ai-app"
+
+syncDomains: false
+
+#required when syncDomains: true
+syncDomainsIntervalSeconds:  3600
+
+#required when syncDomains: true
+mergedJsonSchemaFileLocation: "merged.js"
+
+verticles: [
+
+  {
+    name: "groovy:ai.agentshop.webapp.AgentShopVerticle"
+    worker: false
+    reloadable: true
+    instances: 1
+  },
+  {
+    name: "groovy:ai.haley.webapp.HaleyGenericWebappVerticle"
+    worker: false
+    reloadable: true,
+    instances: 1
+  },
+  
+  {
+    name: "groovy:ai.haley.webapp.client.HaleyClientVerticle"
+    worker: false
+    reloadable: true,
+    instances: 1
+  
+  },
+  {
+    name: "groovy:ai.haley.webapp.webserver.HaleyGenericWebappWebServerVerticle"
+    worker: false
+    reloadable: true
+  }
+
+]
+
+
+webserver {
+
+  compressionSupported: true
+
+  host: 0.0.0.0
+  
+  port: 6098
+
+}
+
+devMode: false
+
+# if app is set up with base webapp behind nginx
+pathPrefix: "/"
+
+agentshopRestAPI: "http://localhost:8098/"
+
+sessionDomain: ".vital.ai"
+
+cookiePrefix: "haleygenericwebapp_"
+
+cookieSecure: true
+
+accountType: "com.vitalai.haley.domain.HaleyAccount"
+
+frontWebappURL: "http://haley-generic-webapp-front.vital.ai"
+
+# for redirect purposes mostly
+webappURL: "https://haley-generic-webapp.vital.ai"
+
+appVersion: "chat-app-0.1.0"
+
+appUnavailableURL: "https:///www.chat.ai"
+
+appID: "haley"
+
+segment: "haley"
+
+#app config object properties
+invitationCodeRequestsEnabled: true
+
+rolesCheckEnabled: true
+
+saasServerURL: "https://haley-saas-server.vital.ai"
+saasEventbusURL: "https://haley-saas-server.vital.ai/eventbus"
+
+enableTestingTab: true
+
+#autologin - allows for development with real backend and no front app / nginx proxy
+autologin {
+  enabled : false
+  username: "username"
+  password: "password"
+}
+
+#in uiDevMode the app starts without admin client and not using remote haley saas service
+# uiDevMode: false
+
+#for "admin" functionality
+disableSaasClient: false
+saasUsername: "haley@haley.ai"
+saasPassword: "password"
+
+mailingEndpointEnabled: true
+saasMailingChannelName: "mailing-list"
+mailgunListName: "testing"
+mailingNotificationEmail: "haley@vital.ai"
+mailingEntitySetName: "MailingListMember"
+
+
+labels {
+  title: "Haley AI"
+  contracts: "Contracts"
+  contract:  "Contract"
+}
+
+ui {
+  hideURI: false
+  hideIndex: false
+  cacheEnabled: true
+  localLoginPage: false
+}
+
+googleOAuth {
+  clientId: "abcdef"
+  clientSecret: "secret"
+  scope: [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/calendar.events.readonly",
+    "https://www.googleapis.com/auth/calendar.readonly",
+    "https://www.googleapis.com/auth/calendar",
+    "https://www.googleapis.com/auth/calendar.events",
+    "https://www.googleapis.com/auth/calendar.settings.readonly"
+  ]
+}

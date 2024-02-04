@@ -1,0 +1,85 @@
+     
+     server {
+    
+        listen 80;
+        server_name  haley-generic-webapp.vital.ai;
+    
+        location /eventbus/ {
+        
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header Host $host;
+        
+          proxy_pass http://127.0.0.1:6098/eventbus/;
+        
+        }
+    
+            
+         location / {
+    
+            #keep status page active
+            rewrite ^/status$ /status break;
+            
+            rewrite ^(/jsonp/.*)$ $1 break;
+            
+            rewrite ^(/callbacks/.*)$ $1 break;
+            
+            rewrite ^(/.*)\.(ico|css|js|json|jsonp|map|gif|jpe?g|png|svg|woff|woff2|ttf)$ $1.$2 break;
+
+            rewrite ^/login$ /login.html break;
+
+            rewrite ^/$ /login.html break;
+
+            #the rest goes to index
+
+            rewrite ^(.*)$ /index.html break;
+
+            proxy_pass http://127.0.0.1:6098/;
+    
+        }
+    }
+    
+    server {
+    
+        listen 443 ssl;
+        server_name  haley-generic-webapp.vital.ai;
+    
+        ssl_certificate      nginx.crt;
+        ssl_certificate_key  nginx.key;
+    
+        location /eventbus/ {
+        
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header Host $host;
+        
+          proxy_pass http://127.0.0.1:6098/eventbus/;
+        
+        }
+    
+            
+         location / {
+    
+            #keep status page active
+            rewrite ^/status$ /status break;
+            
+            rewrite ^(/jsonp/.*)$ $1 break;
+            
+            rewrite ^(/callbacks/.*)$ $1 break;
+            
+            rewrite ^(/.*)\.(ico|css|js|json|jsonp|map|gif|jpe?g|png|svg|woff|woff2|ttf)$ $1.$2 break;
+
+            rewrite ^/login$ /login.html break;
+
+            rewrite ^/$ /login.html break;
+
+            #the rest goes to index
+
+            rewrite ^(.*)$ /index.html break;
+
+            proxy_pass http://127.0.0.1:6098/;
+    
+        }
+    }
