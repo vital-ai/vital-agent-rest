@@ -1,0 +1,4 @@
+.settings/*
+target/*
+config/*.config
+
