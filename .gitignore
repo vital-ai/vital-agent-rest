@@ -2,4 +2,6 @@
 .settings/*
 target/*
 **/*.config
-
+auth/*
+**/.DS_Store
+nohup.out

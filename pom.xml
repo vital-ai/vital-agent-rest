@@ -49,7 +49,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <dependencies>
+<dependencies>
 
 <!-- there is a conflict with another version, so this needs to come first -->
 <dependency>
@@ -59,14 +59,24 @@
 </dependency>
 
 
+<!-- needed to override webmagic dependency -->
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.14.0</version>
+</dependency>
+
 
 <!-- this is here to get the sesame rdf libs -->
+<!-- included directly now? -->
+<!--
 <dependency>
 <groupId>vital-ai</groupId>
   <artifactId>vital-sparql</artifactId>
   <version>0.2.304</version>
 </dependency>
-
+-->
 
 <dependency>
 <groupId>vital-ai</groupId>
@@ -80,8 +90,6 @@
     		<artifactId>vitalsigns</artifactId>
     	</exclusion>
     </exclusions>
-
-
 </dependency>
 
 <dependency>
@@ -98,8 +106,6 @@
 
 </dependency>
 
-
-
 <dependency>
 <groupId>vital-ai</groupId>
 <artifactId>virt-jena2</artifactId>
@@ -107,11 +113,35 @@
 </dependency> 
 
 <dependency> 
-      <groupId>vital-ai</groupId>
-      <artifactId>virt-jdbc4</artifactId>
-      <version>0.1.0</version>
- </dependency> 
+<groupId>vital-ai</groupId>
+<artifactId>virt-jdbc4</artifactId>
+<version>0.1.0</version>
+</dependency> 
 
+<dependency>
+	<groupId>org.apache.httpcomponents</groupId>
+	<artifactId>httpclient</artifactId>
+	<version>4.5.3</version>
+</dependency>
+
+
+<dependency>
+	<groupId>org.apache.httpcomponents</groupId>
+	<artifactId>httpmime</artifactId>
+	<version>4.5.3</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpasyncclient</artifactId>
+    <version>4.1.4</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpcore-nio</artifactId>
+    <version>4.4.14</version>
+</dependency>
 
 
 <dependency>
@@ -172,13 +202,19 @@
 </dependency>
 
 
+<dependency>
+	<groupId>vital-ai</groupId>
+	<artifactId>chat-ai-saas-utils</artifactId>
+	<version>0.1.0</version>
+</dependency>
+
+
 <!-- https://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
 <dependency>
     <groupId>com.ibm.icu</groupId>
     <artifactId>icu4j</artifactId>
     <version>68.2</version>
 </dependency>
-
 
 <dependency>
 	<groupId>com.google.guava</groupId>
@@ -197,6 +233,31 @@
 	<artifactId>xstream</artifactId>
 	<version>1.4.8</version>
 </dependency>
+
+
+<!-- https://mvnrepository.com/artifact/com.google.apis/google-api-services-safebrowsing -->
+<dependency>
+    <groupId>com.google.apis</groupId>
+    <artifactId>google-api-services-safebrowsing</artifactId>
+    <version>v4-rev134-1.25.0</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/us.codecraft/webmagic-core -->
+<dependency>
+    <groupId>us.codecraft</groupId>
+    <artifactId>webmagic-core</artifactId>
+    <version>0.10.0</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+<dependency>
+    <groupId>org.jsoup</groupId>
+    <artifactId>jsoup</artifactId>
+    <version>1.17.2</version>
+</dependency>
+
 
 <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 <dependency>
@@ -228,43 +289,70 @@
       
 </dependency>
 
+
+
+
 <dependency>
 	<groupId>ai.haley</groupId>
   	<artifactId>haley-client-groovy35</artifactId>
   	<version>0.0.1</version>
   			
   	<!-- avoid pulling in dependent groovy that conflicts with local one -->
-			<exclusions>
-				<exclusion>
-					<groupId>org.codehaus.groovy</groupId>
-					<artifactId>groovy</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.codehaus.groovy</groupId>
-					<artifactId>groovy-json</artifactId>
-				</exclusion>
-				
-				
-				<exclusion>
-
-				<groupId>org.codehaus.groovy</groupId>
-				<artifactId>groovy-all</artifactId>
+	<exclusions>
 	
-				</exclusion>
-	
-				<exclusion>
-
-				<groupId>org.codehaus.groovy</groupId>
-				<artifactId>groovy-xml</artifactId>
-	
-				</exclusion>
+		<exclusion>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+		</exclusion>
 				
-			</exclusions>
+		<exclusion>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-json</artifactId>
+		</exclusion>
+				
+		<exclusion>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+		</exclusion>
+	
+		<exclusion>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-xml</artifactId>
+		</exclusion>
+				
+	</exclusions>
   		
-    </dependency>
+</dependency>
 
+
+
+
+<dependency>
+<groupId>com.github.serpapi</groupId>
+<artifactId>google-search-results-java</artifactId>
+<version>2.0.3</version>
+</dependency> 	
+
+<dependency>
+<groupId>com.google.auth</groupId>
+<artifactId>google-auth-library-oauth2-http</artifactId>
+<version>1.6.1</version>
+</dependency>
+
+
+<dependency>
+<groupId>com.google.maps</groupId>
+<artifactId>google-maps-services</artifactId>
+<version>2.1.2</version>
+</dependency>
 
 	<!-- DOMAINS START -->
+    
+    <dependency>
+		<groupId>vitalai-com</groupId>
+		<artifactId>chat-ai</artifactId>
+		<version>0.1.0</version>		
+	</dependency>
     
     <dependency>
       <groupId>haley-ai</groupId>
@@ -359,7 +447,7 @@
 							
               <artifactSet>
               </artifactSet>
-              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>
+              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-with-dependencies.jar</outputFile>
             </configuration>
           </execution>
         </executions>
@@ -380,7 +468,7 @@
               <executable>java</executable>
               <arguments>
                 <argument>-jar</argument>
-                <argument>target/${project.artifactId}-${project.version}-fat.jar</argument>
+                <argument>target/${project.artifactId}-${project.version}-with-dependencies.jar</argument>
               </arguments>
             </configuration>
           </execution>
@@ -418,7 +506,6 @@
       </execution>
     </executions>
   </plugin>
-
 
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
